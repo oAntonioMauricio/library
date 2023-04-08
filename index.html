@@ -17,14 +17,13 @@
     />
     <!-- Javascript -->
     <script src="scripts.js" defer></script>
-
   </head>
 
   <body>
     <div class="container">
       <header class="header">
         <h1>Library</h1>
-        <button>Add Book</button>
+        <button id="newBookModal">Add Book</button>
       </header>
       <div class="card-container" id="cardContainer">
         <div class="card-book">
@@ -35,5 +34,73 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal For New Books Input -->
+    <section class="modalBook modalHidden" id="modalNewBook">
+      <div class="flex-button">
+        <h3>Add a New Book</h3>
+        <button class="btn-close">⨉</button>
+      </div>
+
+      <form class="form-flex" action="" method="post">
+        <div>
+          <label class="book-label" for="book_title">Title</label>
+          <input
+            class="book-input"
+            type="text"
+            name="book_title"
+            id="book_title"
+            required
+          />
+        </div>
+        <div>
+          <label class="book-label" for="book_author">Author</label>
+          <input
+            class="book-input"
+            type="text"
+            name="book_author"
+            id="book_author"
+          />
+        </div>
+        <div>
+          <label class="book-label" for="book_pages">Pages</label>
+          <input
+            class="book-input"
+            type="number"
+            name="book_pages"
+            id="book_pages"
+            placeholder="number: 93"
+          />
+        </div>
+        <div>
+          <label class="book-label" for="">Have You Read It?</label>
+          <div class="input-check-flex">
+            <div class="check-flex">
+              <input
+                class="book-check"
+                type="radio"
+                value="true"
+                name="isRead"
+                id="yesRead"
+              />
+              <label class="book-check-label" for="yesRead">Yes</label>
+            </div>
+            <div class="check-flex">
+              <input
+                class="book-check"
+                type="radio"
+                value="false"
+                name="isRead"
+                id="noRead"
+              />
+              <label class="book-check-label" for="noRead">No</label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <button class="btn">Submit</button>
+    </section>
+    <div class="modalOverlay modalHidden" id="modalOverlay"></div>
   </body>
 </html>

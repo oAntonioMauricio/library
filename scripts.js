@@ -21,6 +21,7 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+// eslint-disable-next-line func-names
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${
     this.isRead ? "yes" : "no"
@@ -62,3 +63,16 @@ Object.values(myLibrary).forEach((i) => {
 
   cardContainer.append(div);
 });
+
+// Open and Close Modal
+const modalButton = document.getElementById("newBookModal");
+const modal = document.getElementById("modalNewBook");
+const overlay = document.getElementById("modalOverlay");
+
+function openModal() {
+  modal.classList.toggle("modalHidden");
+  overlay.classList.toggle("modalHidden");
+}
+
+modalButton.addEventListener("click", openModal);
+overlay.addEventListener("click", openModal);
