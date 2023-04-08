@@ -1,13 +1,13 @@
 // array for storing the books
 const myLibrary = [
   {
-    title: "first book",
+    title: "First book",
     author: "AMMM",
     pages: 76,
     isRead: true,
   },
   {
-    title: "second book",
+    title: "Second book",
     author: "RL",
     pages: 25,
     isRead: false,
@@ -30,3 +30,35 @@ Book.prototype.info = function () {
 function addBookToLibrary(title, author, pages, isRead) {
   myLibrary.push(new Book(title, author, pages, isRead));
 }
+
+// define html elements
+const cardContainer = document.getElementById("cardContainer");
+
+// loop on array and create cards
+Object.values(myLibrary).forEach((i) => {
+  const title = document.createTextNode(i.title);
+  const author = document.createTextNode(i.author);
+  const pages = document.createTextNode(i.pages);
+  const isRead = document.createTextNode(i.isRead ? "Yes" : "No");
+
+  const div = document.createElement("div");
+  div.classList.add("card-book");
+
+  const h4 = document.createElement("h4");
+  h4.append(title);
+  div.append(h4);
+
+  const pAuthor = document.createElement("p");
+  pAuthor.append(author);
+  div.append(pAuthor);
+
+  const pPages = document.createElement("p");
+  pPages.append(pages);
+  div.append(pPages);
+
+  const pRead = document.createElement("p");
+  pRead.append(isRead);
+  div.append(pRead);
+
+  cardContainer.append(div);
+});
