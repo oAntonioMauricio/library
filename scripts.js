@@ -29,37 +29,42 @@ function addBookToLibrary(title, author, pages, isRead) {
 // define html elements
 const cardContainer = document.getElementById("cardContainer");
 
-// loop on array and create cards
+// update the UI with the book object passed as argument
+function updateUI(item) {
+  const title = document.createTextNode(item.title);
+  const author = document.createTextNode(item.author);
+  const pages = document.createTextNode(`${item.pages} Pages`);
+  const isRead = document.createTextNode(
+    item.isRead ? "Read ✅" : "Not Read ❌"
+  );
+
+  const div = document.createElement("div");
+  div.classList.add("card-book");
+  div.setAttribute("arrayIndex", myLibrary.indexOf(item));
+
+  const h4 = document.createElement("h4");
+  h4.append(title);
+  div.append(h4);
+
+  const pAuthor = document.createElement("p");
+  pAuthor.append(author);
+  div.append(pAuthor);
+
+  const pPages = document.createElement("p");
+  pPages.append(pages);
+  div.append(pPages);
+
+  const pRead = document.createElement("p");
+  pRead.append(isRead);
+  div.append(pRead);
+
+  cardContainer.append(div);
+}
+
+// loop on array of objects and create cards
 function displayLibrary() {
   Object.values(myLibrary).forEach((i) => {
-    const title = document.createTextNode(i.title);
-    const author = document.createTextNode(i.author);
-    const pages = document.createTextNode(`${i.pages} Pages`);
-    const isRead = document.createTextNode(
-      i.isRead ? "Read ✅" : "Not Read ❌"
-    );
-
-    const div = document.createElement("div");
-    div.classList.add("card-book");
-    div.setAttribute("arrayIndex", myLibrary.indexOf(i));
-
-    const h4 = document.createElement("h4");
-    h4.append(title);
-    div.append(h4);
-
-    const pAuthor = document.createElement("p");
-    pAuthor.append(author);
-    div.append(pAuthor);
-
-    const pPages = document.createElement("p");
-    pPages.append(pages);
-    div.append(pPages);
-
-    const pRead = document.createElement("p");
-    pRead.append(isRead);
-    div.append(pRead);
-
-    cardContainer.append(div);
+    updateUI(i);
   });
 }
 
@@ -80,8 +85,9 @@ modalButton.addEventListener("click", openModal);
 overlay.addEventListener("click", openModal);
 closeButton.addEventListener("click", openModal);
 
-// Get data from newBook input and update UI
+// Get data from newBook form/input and update UI
 const newBookForm = document.getElementById("newBookForm");
+
 newBookForm.addEventListener("submit", (e) => {
   // prevent sending to backend
   e.preventDefault();
@@ -103,42 +109,9 @@ newBookForm.addEventListener("submit", (e) => {
     bookIsRead.value === "true"
   );
 
-  // update the UI
-  function updateLibrary() {
-    const lastItem = myLibrary[myLibrary.length - 1];
-
-    const title = document.createTextNode(lastItem.title);
-    const author = document.createTextNode(lastItem.author);
-    const pages = document.createTextNode(`${lastItem.pages} Pages`);
-    const isRead = document.createTextNode(
-      lastItem.isRead ? "Read ✅" : "Not Read ❌"
-    );
-
-    const div = document.createElement("div");
-    div.classList.add("card-book");
-    div.setAttribute("arrayIndex", myLibrary.indexOf(lastItem));
-
-    const h4 = document.createElement("h4");
-    h4.append(title);
-    div.append(h4);
-
-    const pAuthor = document.createElement("p");
-    pAuthor.append(author);
-    div.append(pAuthor);
-
-    const pPages = document.createElement("p");
-    pPages.append(pages);
-    div.append(pPages);
-
-    const pRead = document.createElement("p");
-    pRead.append(isRead);
-    div.append(pRead);
-
-    cardContainer.append(div);
-  }
-
-  // update UI
-  updateLibrary();
+  // update the UI with the new book on the array
+  const lastItem = myLibrary[myLibrary.length - 1];
+  updateUI(lastItem);
 
   // reset form for the next book
   newBookForm.reset();
