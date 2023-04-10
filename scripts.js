@@ -58,6 +58,23 @@ function updateUI(item) {
   pRead.append(isRead);
   div.append(pRead);
 
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete-button");
+  deleteButton.setAttribute("id", "deleteBook");
+  // Remove book from UI and Library Array
+  deleteButton.addEventListener("click", (e) => {
+    const bookIndex = e.target.parentNode.getAttribute("arrayindex");
+    e.target.parentNode.remove();
+    myLibrary.splice(bookIndex, 1);
+    const cardChildren = cardContainer.children;
+    for (let i = 0; i < cardChildren.length; i += 1) {
+      const child = cardChildren[i];
+      child.setAttribute("arrayIndex", i);
+    }
+  });
+  deleteButton.append("Delete");
+  div.append(deleteButton);
+
   cardContainer.append(div);
 }
 
@@ -116,5 +133,3 @@ newBookForm.addEventListener("submit", (e) => {
   // reset form for the next book
   newBookForm.reset();
 });
-
-// Remove book from UI and Library Array
