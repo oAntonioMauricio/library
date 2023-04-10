@@ -1,8 +1,8 @@
 // array for storing the books
 const myLibrary = [
   {
-    title: "First book",
-    author: "AMMM",
+    title: "First Book",
+    author: "Tokie Junior",
     pages: 76,
     isRead: true,
   },
@@ -34,11 +34,14 @@ function displayLibrary() {
   Object.values(myLibrary).forEach((i) => {
     const title = document.createTextNode(i.title);
     const author = document.createTextNode(i.author);
-    const pages = document.createTextNode(i.pages);
-    const isRead = document.createTextNode(i.isRead ? "Yes" : "No");
+    const pages = document.createTextNode(`${i.pages} Pages`);
+    const isRead = document.createTextNode(
+      i.isRead ? "Read ✅" : "Not Read ❌"
+    );
 
     const div = document.createElement("div");
     div.classList.add("card-book");
+    div.setAttribute("arrayIndex", myLibrary.indexOf(i));
 
     const h4 = document.createElement("h4");
     h4.append(title);
@@ -77,9 +80,8 @@ modalButton.addEventListener("click", openModal);
 overlay.addEventListener("click", openModal);
 closeButton.addEventListener("click", openModal);
 
-// Get data from newBook input
+// Get data from newBook input and update UI
 const newBookForm = document.getElementById("newBookForm");
-
 newBookForm.addEventListener("submit", (e) => {
   // prevent sending to backend
   e.preventDefault();
@@ -107,11 +109,14 @@ newBookForm.addEventListener("submit", (e) => {
 
     const title = document.createTextNode(lastItem.title);
     const author = document.createTextNode(lastItem.author);
-    const pages = document.createTextNode(lastItem.pages);
-    const isRead = document.createTextNode(lastItem.isRead ? "Yes" : "No");
+    const pages = document.createTextNode(`${lastItem.pages} Pages`);
+    const isRead = document.createTextNode(
+      lastItem.isRead ? "Read ✅" : "Not Read ❌"
+    );
 
     const div = document.createElement("div");
     div.classList.add("card-book");
+    div.setAttribute("arrayIndex", myLibrary.indexOf(lastItem));
 
     const h4 = document.createElement("h4");
     h4.append(title);
@@ -132,5 +137,11 @@ newBookForm.addEventListener("submit", (e) => {
     cardContainer.append(div);
   }
 
+  // update UI
   updateLibrary();
+
+  // reset form for the next book
+  newBookForm.reset();
 });
+
+// Remove book from UI and Library Array
