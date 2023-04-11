@@ -48,13 +48,11 @@
   flex-wrap: wrap;
   gap: 25px;
 
-  border: 2px solid green;
   height: min-content;
   padding: 5% 5%;
 }
 
 .card-book {
-  border: 2px solid blue;
   height: min-content;
   padding: 0px 24px 1.3em;
   border: 2px solid rgb(229 231 235);
@@ -71,7 +69,8 @@
   color: rgb(55 65 81);
 }
 
-.delete-button {
+.delete-button,
+.status-button {
   margin-top: 1.33em;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -89,8 +88,20 @@
 }
 
 .delete-button:hover {
-  background-color: #991B1B; 
+  background-color: #991b1b;
   cursor: pointer;
+}
+
+.status-button {
+  background-color: #f6f8fa;
+  color: #111827;
+  margin-right: 1em;
+}
+
+.status-button:hover {
+  cursor: pointer;
+  background-color: #f3f4f6;
+  color: #1d4ed8;
 }
 
 /* Modal */
@@ -230,4 +241,19 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
+}
+
+/* mobile */
+@media only screen and (max-width: 640px) {
+  .card-book {
+    width: 100%;
+  }
+
+  .modalBook {
+    width: 80vw;
+  }
+
+  .book-input {
+    width: 90%;
+  }
 }

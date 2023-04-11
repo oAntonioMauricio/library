@@ -1,8 +1,8 @@
 // array for storing the books
 const myLibrary = [
   {
-    title: "First Book",
-    author: "Tokie Junior",
+    title: "My First Book",
+    author: "Author",
     pages: 76,
     isRead: true,
   },
@@ -56,11 +56,30 @@ function updateUI(item) {
 
   const pRead = document.createElement("p");
   pRead.append(isRead);
+  pRead.setAttribute("id", "isRead");
   div.append(pRead);
 
+  // update status button
+  const statusButton = document.createElement("button");
+  statusButton.classList.add("status-button");
+  statusButton.setAttribute("id", "statusBook");
+  statusButton.append("Update");
+  div.append(statusButton);
+  statusButton.addEventListener("click", (e) => {
+    const bookIndex = e.target.parentNode.getAttribute("arrayindex");
+    const pToUpdate = e.target.parentNode.querySelector("#isRead");
+    myLibrary[bookIndex].isRead = !myLibrary[bookIndex].isRead;
+    pToUpdate.innerHTML = myLibrary[bookIndex].isRead
+      ? "Read ✅"
+      : "Not Read ❌";
+  });
+
+  // delete button
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
   deleteButton.setAttribute("id", "deleteBook");
+  deleteButton.append("Delete");
+  div.append(deleteButton);
   // Remove book from UI and Library Array
   deleteButton.addEventListener("click", (e) => {
     // eslint-disable-next-line no-alert
@@ -75,9 +94,8 @@ function updateUI(item) {
       }
     }
   });
-  deleteButton.append("Delete");
-  div.append(deleteButton);
 
+  // append card to container
   cardContainer.append(div);
 }
 
