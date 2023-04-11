@@ -63,13 +63,16 @@ function updateUI(item) {
   deleteButton.setAttribute("id", "deleteBook");
   // Remove book from UI and Library Array
   deleteButton.addEventListener("click", (e) => {
-    const bookIndex = e.target.parentNode.getAttribute("arrayindex");
-    e.target.parentNode.remove();
-    myLibrary.splice(bookIndex, 1);
-    const cardChildren = cardContainer.children;
-    for (let i = 0; i < cardChildren.length; i += 1) {
-      const child = cardChildren[i];
-      child.setAttribute("arrayIndex", i);
+    // eslint-disable-next-line no-alert
+    if (window.confirm("Do you want to delete this book?")) {
+      const bookIndex = e.target.parentNode.getAttribute("arrayindex");
+      e.target.parentNode.remove();
+      myLibrary.splice(bookIndex, 1);
+      const cardChildren = cardContainer.children;
+      for (let i = 0; i < cardChildren.length; i += 1) {
+        const child = cardChildren[i];
+        child.setAttribute("arrayIndex", i);
+      }
     }
   });
   deleteButton.append("Delete");
@@ -118,7 +121,7 @@ newBookForm.addEventListener("submit", (e) => {
   // close the modal
   openModal();
 
-  // update the array
+  // update the array myLibrary
   addBookToLibrary(
     bookTitle.value,
     bookAuthor.value,
