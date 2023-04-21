@@ -8,19 +8,35 @@ const myLibrary = [
   },
 ];
 
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-}
+// function Book(title, author, pages, isRead) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.isRead = isRead;
+// }
 
-// eslint-disable-next-line func-names
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.isRead ? "yes" : "no"
-  }`;
-};
+// // eslint-disable-next-line func-names
+// Book.prototype.info = function () {
+//   return `${this.title} by ${this.author}, ${this.pages} pages, ${
+//     this.isRead ? "yes" : "no"
+//   }`;
+// };
+
+// update to use class
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      this.isRead ? "yes" : "no"
+    }`;
+  }
+}
 
 function addBookToLibrary(title, author, pages, isRead) {
   myLibrary.push(new Book(title, author, pages, isRead));
